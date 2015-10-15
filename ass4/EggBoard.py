@@ -23,6 +23,9 @@ class Board:
 
     def get_board(self):
         return self.board
+
+    def is_egg_at(self, x, y):
+        return self.board[y][x]
         
             
                 
