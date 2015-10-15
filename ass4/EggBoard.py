@@ -9,6 +9,21 @@ class Board:
                 temple.append(False)
 
             self.board.append(temple)
+
+
+    def add_egg(self, x, y):
+        self.board[y][x] = True
+
+    def remove_egg(self, x, y):
+        self.board[y][x] = False
+
+    def move_egg(self, x, y, x2, y2):
+        self.add_egg(x2,y2)
+        self.remove_egg(x,y)
+
+    def get_board(self):
+        return self.board
+        
             
                 
 
