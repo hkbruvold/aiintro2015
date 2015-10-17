@@ -31,10 +31,10 @@ class Problem1:
         egg = self.get_random_egg(board)
         
         x = random.randint(0, self.width-1)
-        y = random.randint(0, self.heiht-1)
+        y = random.randint(0, self.height-1)
         while board.is_egg_at(x, y) == True:
             x = random.randint(0, self.width-1)
-            y = random.randint(0, self.heiht-1)
+            y = random.randint(0, self.height-1)
         
         board.move_egg(egg[0], egg[1], x, y)
         
@@ -90,7 +90,5 @@ if __name__ == "__main__":
     p.print_board(p.board)
     print()
     a = p.copy_board()
-    p.board.get_board()[0][0] = True
-    p.print_board(p.board)
-    print()
+    p.make_change(a)
     p.print_board(a)
