@@ -51,7 +51,48 @@ class Problem1:
     
     def get_points(self, board):
         """Return how many rules are broken"""
-        pass
+        
+        points = 0
+        board = board.get_board()
+        
+        ## Check horizontally
+        
+        for row in board:
+            eggs = row.count(True)
+            if eggs > 2:
+                points += (eggs - 2)
+        
+        ## Check vertically
+        
+        count = [0]*len(board[0])
+        for y in range(len(board)):
+            for x in range(len(board[y])):
+                if board[y][x]: count[x] += 1
+        for eggs in count:
+            if eggs > 2:
+                points += (eggs - 2)
+        
+        ## Check diagonally topleft/bottomright
+        
+        count = [0]*(len(board)+len(board[0])-1) # create count list for diagonals
+        for y in range(len(board)):
+            for x in range(len(board[y])):
+                if board[y][x]: count[x-y] += 1 # shift count index by y
+        for eggs in count:
+            if eggs > 2:
+                points += (eggs - 2)
+        
+        ## Check diagonally topright/bottomleft
+        
+        count = [0]*(len(board)+len(board[0])-1) # create count list for diagonals
+        for y in range(len(board)):
+            for x in range(len(board[y])):
+                if board[y][x]: count[x+y] += 1 # shift count index by y
+        for eggs in count:
+            if eggs > 2:
+                points += (eggs - 2)
+        
+        return points
     
     def get_random_egg(self, board):
         """Return coordinate for a random egg on the board"""
@@ -88,7 +129,4 @@ if __name__ == "__main__":
     p = Problem1(5,5,2)
     p.populate_board()
     p.print_board(p.board)
-    print()
-    a = p.copy_board()
-    p.make_change(a)
-    p.print_board(a)
+    print(p.get_points(p.board))
