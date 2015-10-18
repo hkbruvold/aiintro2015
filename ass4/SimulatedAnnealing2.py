@@ -18,14 +18,14 @@ class SimulatedAnnealing:
         variations: A function that returns a list of neighbouring boards
         points: A function to calculate (negative) points for a board"""
         
-        temperature = 10
+        temperature = 10 ## Sets the max temperature value
         current = start_board
         current_points = points(start_board)
         while True:
             if temperature < 0.1 or current_points < 1:
                 return current
             nextlist = variations(current)
-            best_board = nextlist[0]
+            best_board = nextlist[0] # chooses the board with least amount of errors
             q = (current_points - points(best_board)) / current_points
             p = min(1, exp(-q/temperature))
             if random() > p:

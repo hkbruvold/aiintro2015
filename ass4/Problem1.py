@@ -18,6 +18,7 @@ class Problem1:
         self.egg_rule = K
     
     def get_temperature(self, time):
+        """Return temperature based on a given time"""
         cur_temp = (10**7)/float(time**2)
         if cur_temp < 0.1:
             return 0

@@ -14,19 +14,24 @@ class Board:
 
 
     def add_egg(self, x, y):
+        """Add an egg to a coordinate"""
         self.board[y][x] = True
 
     def remove_egg(self, x, y):
+        """Remove an egg from a coordinate"""
         self.board[y][x] = False
 
     def move_egg(self, x, y, x2, y2):
+        """Move an egg from one coordinate to another"""
         self.add_egg(x2,y2)
         self.remove_egg(x,y)
 
     def get_board(self):
+        """Returns the two dimensional list representing the board"""
         return self.board
 
     def is_egg_at(self, x, y):
+        """Returns True if there is an egg at coordinate"""
         return self.board[y][x]
         
     def get_points(self):
