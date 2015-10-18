@@ -18,7 +18,7 @@ class SimulatedAnnealing:
         variation_board: A function that returns a neighbouring board
         points_func: A function to calculate (negative) points for a board"""
         
-        t = 0
+        t = 1
         current = start_board
         current_points = points_func(start_board)
         while True:

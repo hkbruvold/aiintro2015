@@ -10,7 +10,7 @@ class DrawBoard:
     
     def __init__(self, board):
         self.board = board.get_board()
-        self.tile_size = 20 # size of each row/column in pixels
+        self.tile_size = 40 # size of each row/column in pixels
         self.board_width = len(self.board[0])
         self.board_height = len(self.board)
         image_size = (self.board_width * self.tile_size,
@@ -24,6 +24,7 @@ class DrawBoard:
         self.board_image.save(filename)
         
     def draw_board(self):
+        """Draw the board grid"""
         draw = ImageDraw.Draw(self.board_image)
         
         for y in range(self.board_height):
@@ -34,6 +35,7 @@ class DrawBoard:
                 draw.rectangle(coord, fill="white", outline="black")
      
     def draw_eggs(self):
+        """Draw the eggs"""
         draw = ImageDraw.Draw(self.board_image)
         
         for y in range(len(self.board)):
