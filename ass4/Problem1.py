@@ -4,6 +4,7 @@ import random
 import copy
 
 from EggBoard import Board
+from SimulatedAnnealing import SimulatedAnnealing as SA
 
 class Problem1:
     """ Class for problem 1 in assignment 4"""
@@ -13,6 +14,11 @@ class Problem1:
         self.width = M
         self.height = N
         self.egg_rule = K
+    
+    def get_temperature(self, time):
+        start_temp = 10000
+        cur_temp = start_temp - time
+        return max(cur_temp, 0)
     
     def populate_board(self):
         """fill the board with as many eggs as possible in random positions"""
@@ -38,7 +44,12 @@ class Problem1:
         
         board.move_egg(egg[0], egg[1], x, y)
         
+        return board
     
+    def get_variation(self, board):
+        return self.make_change(self.copy(board))
+        
+    ## TODO: consider if necessary
     def get_variations(self, n):
         """Will return a list of n boards with different changes"""
         variations = []
@@ -51,7 +62,6 @@ class Problem1:
     
     def get_points(self, board):
         """Return how many rules are broken"""
-        
         points = 0
         board = board.get_board()
         
@@ -109,7 +119,11 @@ class Problem1:
                     egg_counter += 1
         raise Exception("egg_counter error, this should not happen")
                 
+    def copy(self, obj):
+        """Will make a "deep" copy of object"""
+        return copy.deepcopy(obj)
     
+    ## TODO: consider if necessary
     def copy_board(self):
         """Will make a copy of the main board object"""
         return copy.deepcopy(self.board)
@@ -130,3 +144,7 @@ if __name__ == "__main__":
     p.populate_board()
     p.print_board(p.board)
     print(p.get_points(p.board))
+    s = SA()
+    sa_board = s.run(p.board, p.get_temperature, p.get_variation, p.get_points)
+    p.print_board(sa_board)
+    print(p.get_points(sa_board))
